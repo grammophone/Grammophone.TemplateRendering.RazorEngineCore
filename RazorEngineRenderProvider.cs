@@ -105,7 +105,10 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		{
 			var engineKey = this.razorEngineService.GetKey(templateKey);
 
-			this.razorEngineService.RunCompile(engineKey, viewBag: new DynamicViewBag(dynamicProperties));
+			this.razorEngineService.RunCompile(
+				engineKey, 
+				textWriter,
+				viewBag: new DynamicViewBag(dynamicProperties));
 		}
 
 		/// <summary>
@@ -130,6 +133,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 
 			this.razorEngineService.RunCompile(
 				engineKey,
+				textWriter,
 				modelType: typeof(M),
 				model: model,
 				viewBag: dynamicProperties != null ? new DynamicViewBag(dynamicProperties) : null);
@@ -151,7 +155,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 			if (!Path.IsPathRooted(pathName))
 			{
 				// If not, translate it according to the AppDomain's base. 
-				pathName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathName);
+				pathName = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, pathName);
 			}
 
 			return pathName;
