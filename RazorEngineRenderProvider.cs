@@ -39,7 +39,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		{
 			if (templateFolderRoots == null) throw new ArgumentNullException(nameof(templateFolderRoots));
 
-			templateFolderRoots = templateFolderRoots.Select(f => NormalizePath(f));
+			templateFolderRoots = templateFolderRoots.SelectMany(f => NormalizePath(f));
 
 			Initialize(templateFolderRoots);
 		}
@@ -56,9 +56,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		{
 			if (templateFolderRoot == null) throw new ArgumentNullException(nameof(templateFolderRoot));
 
-			templateFolderRoot = NormalizePath(templateFolderRoot);
-
-			Initialize(Enumerable.Repeat(templateFolderRoot, 1));
+			Initialize(NormalizePath(templateFolderRoot));
 		}
 
 		#endregion
@@ -145,20 +143,30 @@ namespace Grammophone.TemplateRendering.RazorEngine
 
 		/// <summary>
 		/// If <paramref name="pathName"/> is a relative one, it converts it
-		/// to absolute by combining it with the application's root.
+		/// to absolute by combining it with the application's root or bin directory
+		/// whichever are available.
 		/// </summary>
 		/// <param name="pathName">The path name.</param>
-		/// <returns>Returns the normalized path name.</returns>
-		private static string NormalizePath(string pathName)
+		/// <returns>Returns the normalized path names.</returns>
+		private static IEnumerable<string> NormalizePath(string pathName)
 		{
 			// Is this an absolute or a relative path?
 			if (!Path.IsPathRooted(pathName))
 			{
-				// If not, translate it according to the AppDomain's base. 
-				pathName = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, pathName);
-			}
+				// If not, translate it according to the AppDomain's base and bin folders.
 
-			return pathName;
+				if (AppDomain.CurrentDomain.RelativeSearchPath != null
+					&& AppDomain.CurrentDomain.RelativeSearchPath != AppDomain.CurrentDomain.BaseDirectory)
+				{
+					yield return Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, pathName);
+				}
+
+				yield return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, pathName);
+			}
+			else
+			{
+				yield return pathName;
+			}
 		}
 
 		/// <summary>
