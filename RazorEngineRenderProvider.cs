@@ -178,7 +178,10 @@ namespace Grammophone.TemplateRendering.RazorEngine
 
 			var configuration = new TemplateServiceConfiguration()
 			{
-				TemplateManager = new ResolvePathTemplateManager(templateFolderRoots),
+#if DEBUG
+				Debug = true,
+#endif
+				TemplateManager = new ResolvePathTemplateManager(templateFolderRoots)
 			};
 
 			this.razorEngineService = RazorEngineService.Create(configuration);
