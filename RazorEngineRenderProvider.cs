@@ -35,13 +35,11 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		/// These can be relative paths, which will be transformed to absolute
 		/// based on the application's root.
 		/// </param>
-		public RazorEngineRenderProvider(IEnumerable<string> templateFolderRoots)
+		public RazorEngineRenderProvider(string[] templateFolderRoots)
 		{
 			if (templateFolderRoots == null) throw new ArgumentNullException(nameof(templateFolderRoots));
 
-			templateFolderRoots = templateFolderRoots.SelectMany(f => NormalizePath(f));
-
-			Initialize(templateFolderRoots);
+			Initialize(templateFolderRoots.SelectMany(f => NormalizePath(f)));
 		}
 
 		/// <summary>
