@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
+using RazorEngine.Text;
 
 namespace Grammophone.TemplateRendering.RazorEngine
 {
@@ -28,7 +29,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		#region Construction
 
 		/// <summary>
-		/// Create.
+		/// Create with HTML escaping rules.
 		/// </summary>
 		/// <param name="templateFolderRoots">
 		/// A collection of folder roots to search for Razor templates.
@@ -36,10 +37,39 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		/// based on the application's root.
 		/// </param>
 		public RazorEngineRenderProvider(string[] templateFolderRoots)
+			: this(templateFolderRoots, EncodingMode.Html)
+		{
+		}
+
+		/// <summary>
+		/// Create with HTML escaping rules.
+		/// </summary>
+		/// <param name="templateFolderRoot">
+		/// A folder root to search for Razor templates.
+		/// It can be relative a path, which will be transformed to absolute
+		/// based on the application's root.
+		/// </param>
+		public RazorEngineRenderProvider(string templateFolderRoot)
+			: this(templateFolderRoot, EncodingMode.Html)
+		{
+		}
+
+		/// <summary>
+		/// Create.
+		/// </summary>
+		/// <param name="templateFolderRoots">
+		/// A collection of folder roots to search for Razor templates.
+		/// These can be relative paths, which will be transformed to absolute
+		/// based on the application's root.
+		/// </param>
+		/// <param name="encodingMode">
+		/// The escaping to use for strings generated from templates.
+		/// </param>
+		public RazorEngineRenderProvider(string[] templateFolderRoots, EncodingMode encodingMode)
 		{
 			if (templateFolderRoots == null) throw new ArgumentNullException(nameof(templateFolderRoots));
 
-			Initialize(templateFolderRoots.SelectMany(f => NormalizePath(f)));
+			Initialize(templateFolderRoots, encodingMode);
 		}
 
 		/// <summary>
@@ -50,11 +80,14 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		/// It can be relative a path, which will be transformed to absolute
 		/// based on the application's root.
 		/// </param>
-		public RazorEngineRenderProvider(string templateFolderRoot)
+		/// <param name="encodingMode">
+		/// The escaping to use for strings generated from templates.
+		/// </param>
+		public RazorEngineRenderProvider(string templateFolderRoot, EncodingMode encodingMode)
 		{
 			if (templateFolderRoot == null) throw new ArgumentNullException(nameof(templateFolderRoot));
 
-			Initialize(NormalizePath(templateFolderRoot));
+			Initialize(NormalizePath(templateFolderRoot), encodingMode);
 		}
 
 		#endregion
@@ -170,7 +203,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		/// <summary>
 		/// Finishes constructor work.
 		/// </summary>
-		private void Initialize(IEnumerable<string> templateFolderRoots)
+		private void Initialize(IEnumerable<string> templateFolderRoots, EncodingMode encodingMode)
 		{
 			if (templateFolderRoots == null) throw new ArgumentNullException(nameof(templateFolderRoots));
 
@@ -181,8 +214,19 @@ namespace Grammophone.TemplateRendering.RazorEngine
 #if DEBUG
 				Debug = true,
 #endif
-				TemplateManager = new ResolvePathTemplateManager(templateFolderRoots)
+				TemplateManager = new ResolvePathTemplateManager(templateFolderRoots),
 			};
+
+			switch (encodingMode)
+			{
+				case EncodingMode.RawText:
+					configuration.EncodedStringFactory = new RawStringFactory();
+					break;
+
+				default:
+					configuration.EncodedStringFactory = new HtmlEncodedStringFactory();
+					break;
+			}
 
 			this.razorEngineService = RazorEngineService.Create(configuration);
 		}
