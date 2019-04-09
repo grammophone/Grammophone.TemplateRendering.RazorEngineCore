@@ -69,7 +69,7 @@ namespace Grammophone.TemplateRendering.RazorEngine
 		{
 			if (templateFolderRoots == null) throw new ArgumentNullException(nameof(templateFolderRoots));
 
-			Initialize(templateFolderRoots, encodingMode);
+			Initialize(templateFolderRoots.SelectMany(f => NormalizePath(f)), encodingMode);
 		}
 
 		/// <summary>
