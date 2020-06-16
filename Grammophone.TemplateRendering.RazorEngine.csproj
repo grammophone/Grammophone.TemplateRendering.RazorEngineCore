@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{F9592CC7-9734-4F56-9D4E-317106D198FB}</ProjectGuid>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyTitle>Grammophone.TemplateRendering.RazorEngine</AssemblyTitle>
     <Product>Grammophone.TemplateRendering.RazorEngine</Product>
     <Copyright>Copyright ©  2016</Copyright>
@@ -15,13 +15,9 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.0.0" />
-    <PackageReference Include="RazorEngine" Version="3.9.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Net.Http" />
+    <!--<PackageReference Include="Microsoft.AspNet.Razor" Version="3.0.0" />
+    <PackageReference Include="RazorEngine" Version="3.9.3" />-->
+		<PackageReference Include="RazorEngine.NetCore" Version="2.2.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Grammophone.TemplateRendering\Grammophone.TemplateRendering.csproj" />
