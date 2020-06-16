@@ -15,9 +15,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <!--<PackageReference Include="Microsoft.AspNet.Razor" Version="3.0.0" />
-    <PackageReference Include="RazorEngine" Version="3.9.3" />-->
-		<PackageReference Include="RazorEngine.NetCore" Version="2.2.6" />
+		<PackageReference Include="RazorEngine.NetCore.ZuLiang" Version="2.2.3.6" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Grammophone.TemplateRendering\Grammophone.TemplateRendering.csproj" />

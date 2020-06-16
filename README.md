@@ -1,5 +1,5 @@
 # Grammophone.TemplateRendering.RazorEngine
-This library implements the contract set by [Grammophone.TemplateRendering](https://github.com/grammophone/Grammophone.TemplateRendering)
+This .NET Standard 2.0 library implements the contract set by [Grammophone.TemplateRendering](https://github.com/grammophone/Grammophone.TemplateRendering)
 to provide template rendering using the Razor engine of ASP.NET MVC.
 
 The [RazorEngine](https://github.com/Antaris/RazorEngine) library is used to invoke the Razor engine.
