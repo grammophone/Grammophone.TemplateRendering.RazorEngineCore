@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Grammophone.TemplateRendering.RazorEngine
+namespace Grammophone.TemplateRendering.RazorEngineCore
 {
 	/// <summary>
 	/// Specifies how to encode strings generated from templates.

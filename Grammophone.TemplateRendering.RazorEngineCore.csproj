@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{F9592CC7-9734-4F56-9D4E-317106D198FB}</ProjectGuid>
+    <ProjectGuid>{8DC64151-F21E-4AAF-8018-7BE3B38F5CEF}</ProjectGuid>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyTitle>Grammophone.TemplateRendering.RazorEngine</AssemblyTitle>
-    <Product>Grammophone.TemplateRendering.RazorEngine</Product>
-    <Copyright>Copyright ©  2016</Copyright>
+    <AssemblyTitle>Grammophone.TemplateRendering.RazorEngineCore</AssemblyTitle>
+    <Product>Grammophone.TemplateRendering.RazorEngineCore</Product>
+    <Copyright>Copyright © domos.tech 2020</Copyright>
     <DocumentationFile>bin\$(Configuration)\Grammophone.TemplateRendering.RazorEngine.XML</DocumentationFile>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
