@@ -8,7 +8,7 @@ using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using RazorEngine.Text;
 
-namespace Grammophone.TemplateRendering.RazorEngineCore
+namespace Grammophone.TemplateRendering.RazorEngine
 {
 	/// <summary>
 	/// Implements the <see cref="IRenderProvider"/> using the RazorEngine library.

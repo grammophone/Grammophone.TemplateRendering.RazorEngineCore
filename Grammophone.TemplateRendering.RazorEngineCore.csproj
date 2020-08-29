@@ -5,7 +5,7 @@
     <AssemblyTitle>Grammophone.TemplateRendering.RazorEngineCore</AssemblyTitle>
     <Product>Grammophone.TemplateRendering.RazorEngineCore</Product>
     <Copyright>Copyright © domos.tech 2020</Copyright>
-    <DocumentationFile>bin\$(Configuration)\Grammophone.TemplateRendering.RazorEngine.XML</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\Grammophone.TemplateRendering.RazorEngineCore.XML</DocumentationFile>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -15,7 +15,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-		<PackageReference Include="RazorEngine.NetCore.ZuLiang" Version="2.2.3.6" />
+		<PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Grammophone.TemplateRendering\Grammophone.TemplateRendering.csproj" />
