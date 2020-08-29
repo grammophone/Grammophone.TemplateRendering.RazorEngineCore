@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{8DC64151-F21E-4AAF-8018-7BE3B38F5CEF}</ProjectGuid>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyTitle>Grammophone.TemplateRendering.RazorEngineCore</AssemblyTitle>
     <Product>Grammophone.TemplateRendering.RazorEngineCore</Product>
     <Copyright>Copyright © domos.tech 2020</Copyright>
